@@ -1,0 +1,18 @@
+---
+import Technology from "../components/Technology.astro";
+import MiLayout from "../layouts/MiLayout.astro";
+
+const array = [
+    {title: 'html', description: 'Estructura de la web'},
+    {title:'css', description: 'Estilo de la web'},
+    {title:'js', description: 'Logica de negocio'}
+]
+---
+
+<MiLayout>
+    <h1>Listado de tecnologias que domino</h1>
+    <ul>
+        {array.map(technology => 
+        <Technology title = {technology.title} description = {technology.description}/>)}
+    </ul>
+</MiLayout>

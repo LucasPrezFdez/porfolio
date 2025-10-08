@@ -1,0 +1,14 @@
+---
+// pagina generada con static site generation
+import MiLayout from "../layouts/MiLayout.astro";
+
+const calificativo = "favoritos!";
+const teachers = ["Angel", "Pepe", "Antonio", "Marta"];
+---
+
+<MiLayout>
+  <h1>Listado de profes {calificativo}</h1>
+  <ul>
+    {teachers.map((teacher) => <li>{teacher}</li>)}
+  </ul>
+</MiLayout>
