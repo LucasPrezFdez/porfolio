@@ -21,11 +21,11 @@ y en el if solo hacerlo con salida -->
     const salida = document.getElementById("output");
     const id = Math.floor(Math.random() * 10) + 1;
 
-    const response = await fetch(apikey + "1");
+    const response = await fetch(apikey + id);
     const user = await response.json();
 
     if (salida) {
-      salida.innerHTML = `${user.id.name} + ${user.id.email}`;
+      salida.innerHTML = `${user.name} + ${user.email}`;
     }
   });
 </script>
