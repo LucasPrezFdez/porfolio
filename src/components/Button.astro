@@ -1,0 +1,9 @@
+---
+import styles from "./Button.module.css"
+
+const {href} = Astro.props
+
+---
+<a href={href} class={styles.btn}><slot/></a>
+
+

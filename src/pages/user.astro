@@ -1,0 +1,31 @@
+---
+import MiLayout from "../layouts/MiLayout.astro";
+
+// API https://jsonplaceholder.typicode.com/users
+---
+
+<MiLayout>
+  <h1>Lista de usuarios</h1>
+  <p id="output"></p>
+</MiLayout>
+
+<!--Async arriba del todo
+le sobra el +
+la lambda
+catch
+y en el if solo hacerlo con salida -->
+<script>
+  const apikey = "https://jsonplaceholder.typicode.com/users/";
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const salida = document.getElementById("output");
+    const id = Math.floor(Math.random() * 10) + 1;
+
+    const response = await fetch(apikey + "1");
+    const user = await response.json();
+
+    if (salida) {
+      salida.innerHTML = `${user.id.name} + ${user.id.email}`;
+    }
+  });
+</script>
