@@ -1,12 +1,30 @@
 ---
-import MiLayout from "../layouts/MiLayout.astro";
+import MiLayout from "../../layouts/MiLayout.astro";
 
 // API https://jsonplaceholder.typicode.com/users
+
+interface User {
+  id : number,
+  name : string,
+  email : string
+}
+
+const apikey = "https://jsonplaceholder.typicode.com/users/";
+const id = Math.floor(Math.random() * 10) + 1;
+
+const response = await fetch(apikey);
+const users : User[] = await response.json();
+
+
 ---
 
 <MiLayout>
   <h1>Lista de usuarios</h1>
-  <p id="output"></p>
+  <p id="output">
+    <ul>
+      {users.map((user) => <li><a href={`/users/${user.id}`}>{user.name} - {user.email}</li></a> )}
+    </ul>
+  </p>
 </MiLayout>
 
 <!--Async arriba del todo
@@ -15,7 +33,7 @@ la lambda
 catch
 y en el if solo hacerlo con salida -->
 <script>
-  const apikey = "https://jsonplaceholder.typicode.com/users/";
+  /* const apikey = "https://jsonplaceholder.typicode.com/users/";
 
   document.addEventListener("DOMContentLoaded", async () => {
     const salida = document.getElementById("output");
@@ -27,5 +45,5 @@ y en el if solo hacerlo con salida -->
     if (salida) {
       salida.innerHTML = `${user.name} + ${user.email}`;
     }
-  });
+  }); */
 </script>
