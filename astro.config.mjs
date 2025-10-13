@@ -8,6 +8,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  site: 'https://lucasprezfdez.github.io/porfolio/',
   base: 'porfolio',
     outDir: './docs'
   //output: "server",
