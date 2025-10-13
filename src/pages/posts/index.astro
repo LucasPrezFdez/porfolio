@@ -1,0 +1,21 @@
+---
+import MiLayout from "../../layouts/MiLayout.astro";
+
+interface Post{
+    id: number,
+    title: string
+}
+
+const apikey = "https://jsonplaceholder.typicode.com/posts/";
+
+const response = await fetch(apikey);
+const posts:Post[] = await response.json()
+---
+
+
+<MiLayout title="Lista de posts">
+<h1>Lista de Posts</h1>
+<ul>
+    {posts.map( post => <li><a href={`/posts/${post.id}`}>{post.title}</a></li>)}
+</ul>
+</MiLayout>
