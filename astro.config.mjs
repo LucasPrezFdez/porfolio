@@ -10,6 +10,6 @@ export default defineConfig({
   },
   site: 'https://lucasprezfdez.github.io/porfolio/',
   base: 'porfolio',
-    outDir: './docs'
-  //output: "server",
+  outDir: './docs',
+  output: "server",
 });
