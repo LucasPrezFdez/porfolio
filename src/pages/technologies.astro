@@ -12,6 +12,6 @@ import Button from "../components/Button.astro";
         {technologies.map(technology => 
         <Technology title = {technology.title} description = {technology.description}/>)}
     </ul>
-    <Button href="/">Volver</Button>
+    <Button href="/" client:idle>Volver</Button>
 </MiLayout>
 

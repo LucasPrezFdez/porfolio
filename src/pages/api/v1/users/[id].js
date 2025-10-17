@@ -1,4 +1,4 @@
-export async function GET({ params }) {
+/* export async function GET({ params }) {
   // Simulamos "base de datos"
   let users = [
     { id: "1", name: "Ana" },
@@ -24,5 +24,25 @@ export async function GET({ params }) {
   return new Response(
     JSON.stringify({ message: `Usuario con id ${id} eliminado`, users }),
     { status: 200 }
+  );
+} */
+export async function GET({ params }) {
+  let users = [{ id: "1", name: "Ana" }];
+
+  const id = Number(params.id);
+
+  return new Response(JSON.stringify(users), {
+    status: 200
+  });
+}
+
+export async function DELETE(params) {
+  const id = Number(params.id);
+
+  return new Response(
+    JSON.stringify({ message: `Usuario ${id} borrado correctamente` }),
+    {
+      status: 200,
+    }
   );
 }
