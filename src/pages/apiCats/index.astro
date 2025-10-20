@@ -1,0 +1,14 @@
+---
+
+interface cat {
+    id: number
+    url: string
+}
+
+const url = "https://api.thecatapi.com/v1/images/search?api_key="
+
+const apikey = "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ/"
+
+const response = await fetch(url+apikey+Math.floor(Math.random() * 100) + 1)
+
+---
