@@ -7,13 +7,17 @@ interface Cat {
     url: string
 }
 
-const url = "https://api.thecatapi.com/v1/images/search?api_key="
+const url = "https://api.thecatapi.com/v1/images/"
 
 const apikey = "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ/"
-
+const {id} = Astro.params
 
 export async function getStaticPaths() {
-    const response = await fetch(url + apikey);
+    const response = await fetch(url+`${id}`,{
+        headers : {
+            "x-api-key": "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ"
+        }
+    });
     const cats: Cat[] = await response.json();
     // Si solo quieres un gato, toma el primero
     return cats.map((cat: Cat) => ({
