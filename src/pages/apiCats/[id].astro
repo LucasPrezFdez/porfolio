@@ -7,34 +7,30 @@ interface Cat {
     url: string
 }
 
-const url = "https://api.thecatapi.com/v1/images/search?api_key="
+const url = "https://api.thecatapi.com/v1/images/"
 
 const apikey = "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ/"
-
+const {id} = Astro.params
 
 export async function getStaticPaths() {
-    
-    const response = await fetch(url+apikey)
-    const cats:Cat[] = await response.json()
-    return cats.map((cat:Cat) => ({
-        params: {id: cat.id.toString()}, props: {cat:cat}
-    }))
-} 
-// Astro may not always provide `props` (for example during some dev renders),
-// so access it safely and fall back to null.
-const cat: Cat | null = (Astro.props && Astro.props.cat) ? Astro.props.cat : null;
-    
+    const response = await fetch(url+`${id}`,{
+        headers : {
+            "x-api-key": "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ"
+        }
+    });
+    const cats: Cat[] = await response.json();
+    // Si solo quieres un gato, toma el primero
+    return cats.map((cat: Cat) => ({
+        params: { id: cat.id.toString() }, props: { cat:cat }
+    }));
+}
+
+const {cat} = Astro.props    
 ---
 
 
 <MiLayout>
     <h1>Cats</h1>
-    {cat ? (
-        <>
-            <h2>Gato numero {cat.id}</h2>
-            <p><img src={cat.url} alt={`Cat ${cat.id}`} /></p>
-        </>
-    ) : (
-        <p>Cat data is not available. Try rebuilding or visit a generated path.</p>
-    )}
+    <h2>Gato numero {cat?.id}</h2>
+    <p><img src=`${cat?.url}`alt={`Cat ${cat?.id}`} /></p>
 </MiLayout>

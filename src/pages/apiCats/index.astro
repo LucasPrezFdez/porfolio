@@ -1,9 +1,13 @@
 ---
 import MiLayout from "../../layouts/MiLayout.astro"
+<<<<<<< HEAD
+
+=======
+>>>>>>> b750c0b7a35a9f7e5df4e5e131309b06bafacd3f
 
 
-interface cat {
-    id: number
+interface Cat {
+    id: string
     url: string
 }
 
@@ -11,11 +15,23 @@ const url = "https://api.thecatapi.com/v1/images/search?api_key="
 
 const apikey = "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h18tYFQ/"
 
-const response = await fetch(url+apikey+Math.floor(Math.random() * 100) + 1)
+let randomId = Math.floor(Math.random() * 100) + 1
+const response = await fetch(url+apikey+randomId)
 
+<<<<<<< HEAD
 ---
 
 <MiLayout>
     <h1>Gatete Random</h1>
     <p></p>
+=======
+const cats: Cat[] = await response.json()
+const cat: Cat = cats[0]
+
+---
+
+<MiLayout>
+    <h1>Gatos</h1>
+    <p><img src={cat.url} alt="" width=""></p>
+>>>>>>> b750c0b7a35a9f7e5df4e5e131309b06bafacd3f
 </MiLayout>
