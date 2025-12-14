@@ -1,4 +1,6 @@
 ---
+import MiLayout from "../../layouts/MiLayout.astro"
+
 
 interface cat {
     id: number
@@ -12,3 +14,8 @@ const apikey = "live_AEGOOQEwID2TGu8s8J9CNgu1Mvyv8vaBrhRrhtLaCbFJF7HJgP9bNuwR8h1
 const response = await fetch(url+apikey+Math.floor(Math.random() * 100) + 1)
 
 ---
+
+<MiLayout>
+    <h1>Gatete Random</h1>
+    <p></p>
+</MiLayout>
