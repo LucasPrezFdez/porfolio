@@ -1,0 +1,53 @@
+---
+// Hacemos fetch a la API de SpaceX (Past Launches)
+const response = await fetch('https://api.spacexdata.com/v5/launches/past');
+const data = await response.json();
+
+// Obtenemos los últimos 12 lanzamientos
+const launches = data.slice(0, 12);
+---
+
+<main class="page">
+    <header class="page__header">
+        <h1 class="page__title">Misiones SpaceX</h1>
+        <p class="page__subtitle">Últimos 12 lanzamientos</p>
+    </header>
+
+    <section class="cards">
+        {launches.map((launch) => (
+            <article class="card">
+                <div class="card__media">
+                    <img
+                        src={launch.links.patch.small || "https://via.placeholder.com/150?text=No+Patch"}
+                        alt={`Parche de ${launch.name}`}
+                    />
+                </div>
+                <div class="card__body">
+                    <h2 class="card__title">{launch.name}</h2>
+                    <p class="card__meta">{new Date(launch.date_utc).toLocaleDateString()}</p>
+                    <p class="card__text">{launch.details || "Sin detalles disponibles para esta misión."}</p>
+                    <a href={`${launch.id}`} class="card__cta">Ver detalles</a>
+                </div>
+            </article>
+        ))}
+    </section>
+</main>
+
+<style>
+    .page { min-height: 100vh; background:#0f172a; color:#fff; padding:2rem; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    .page__header { max-width: 64rem; margin: 0 auto 2rem; text-align:center; }
+    .page__title { font-size: clamp(2rem, 3vw, 3rem); font-weight: 800; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; margin:0; }
+    .page__subtitle { color:#9ca3af; margin-top:.5rem; }
+
+    .cards { max-width: 64rem; margin: 0 auto; display:grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap:1.25rem; }
+    .card { background:#1f2937; border:1px solid #374151; border-radius: .75rem; overflow:hidden; box-shadow: 0 10px 20px rgba(0,0,0,.25); display:flex; flex-direction:column; transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,.35); }
+    .card__media { display:flex; justify-content:center; align-items:center; background: rgba(148,163,184,.15); padding:1rem; }
+    .card__media img { height: 140px; width:auto; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,.45)); }
+    .card__body { padding:1rem 1rem 1.25rem; display:flex; flex-direction:column; gap:.5rem; }
+    .card__title { font-size:1.25rem; font-weight:700; margin:0; }
+    .card__meta { color:#94a3b8; font-size:.875rem; }
+    .card__text { color:#cbd5e1; font-size:.95rem; line-height:1.5; min-height: 3.6em; }
+    .card__cta { margin-top:.5rem; display:block; text-align:center; background:#2563eb; color:#fff; text-decoration:none; padding:.65rem 1rem; border-radius:.5rem; font-weight:600; transition: background .15s ease; }
+    .card__cta:hover { background:#1d4ed8; }
+</style>
